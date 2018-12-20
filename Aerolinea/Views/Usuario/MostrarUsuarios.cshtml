@@ -1,0 +1,68 @@
+﻿@model Aerolinea.Models.MostrarViewModels.MostrarUsuariosViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Usuarios";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+<div>
+    <h3>Usuarios</h3>
+    @{
+        <div class="jumbotron">
+            @Html.ActionLink("Registra Nuevo Usuario", lg.ObtenerDireccionNuevoUsuario(), "Usuario")
+        </div>
+
+            if (Model.listUsers.Count == 0)
+            {
+            <div class="jumbotron">
+                <div class="text-danger">
+                    <p>No hay usuarios registrados</p>
+                </div>
+            </div>
+            }
+            else
+            {
+            <div class="row">
+                <div class="col-md-10 col-lg-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-bordered table-condensed">
+                            <tr class="text-center active">
+                                <th>Correo/Nombre Usuario</th>
+                                <th>Rol</th>
+                                <th>Actualizar Usuario</th>
+                                <th>Eliminar Usuario</th>
+                            </tr>
+                            @{
+                                string[] Roles = { "vacio", "Administrador Sistema", "Administrador Aerolinea", "Agente Aerolinea", "Usuario Estandar" };
+                            }
+                            @foreach (var usuario in Model.listUsers)
+                            {
+                                if (usuario.Estado != 0)
+                                {
+                                    <tr>
+                                        <td>@usuario.Correo</td>
+                                        <td>@Roles[@usuario.Rol]</td>
+                                        <!--Seccion Extra para los valores especificos de los usuarios-->
+                                        <td>@Html.ActionLink("Editar", "ActualizarUsuario", "Usuario", new { id = usuario.UsuarioID }, null)</td>
+                                        <td>@Html.ActionLink("Desactivar", "DesactivarUsuario", "Usuario", new { id = usuario.UsuarioID }, null)</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>@usuario.Correo</td>
+                                        <td>@Roles[@usuario.Rol]</td>
+                                        <!--Seccion Extra para los valores especificos de los usuarios-->
+                                        <td>@Html.ActionLink("Editar", "ActualizarUsuario", "Usuario", new { id = usuario.UsuarioID }, null)</td>
+                                        <td>@Html.ActionLink("Activar", "ActivarUsuario", "Usuario", new { id = usuario.UsuarioID }, null)</td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+            }
+            }
+
+        </div>

@@ -1,0 +1,27 @@
+﻿@model Aerolinea.Models.UsuarioViewModel.IniciarSesionViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Iniciar Sesion";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+    @using (Html.BeginForm("IniciarSesion", "Usuario", FormMethod.Post, new { @class = "form-inline", @role="form" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Correo, new { @class = "option" })
+            @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", @placeholder = "Nombre Usuario o Correo.." })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Contrasena, new { @class = "option" })
+            @Html.PasswordFor(model => model.Contrasena, new { @class = "form-control", @placeholder = "Contraseña.." })
+        </div>
+        <div class="form-control-static">
+            <input type="submit" class="btn btn-primary" value="Iniciar sesion" />
+            @Html.ActionLink("Olvido su contraseña?", "RecuperarContrasena", "Usuario")
+        </div>
+        
+    }
+</div>

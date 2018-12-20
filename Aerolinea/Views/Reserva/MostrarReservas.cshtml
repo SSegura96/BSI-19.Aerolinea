@@ -1,0 +1,61 @@
+﻿@model Aerolinea.Models.MostrarViewModels.MostrarReservasViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Reservas";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div>
+    <h3>Reservas</h3>
+    @{
+        if (lg.GetUserType() != 0)
+        {
+            <div class="jumbotron">
+                @Html.ActionLink("Reservar Vuelo", "RegistrarReserva", "Administrar")
+            </div>
+
+
+            if (Model.ListReservas.Count == 0)
+            {
+                <div class="jumbotron">
+                    <div class="text-danger">
+                        <p>No hay reservas disponibles</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-md-10 col-lg-offset-1">
+                        <div class="table-responsive">
+                            <table class="table table-condensed table-hover table-bordered table-condensed">
+                                <tr class="text-center active">
+                                    <th>Pasajero</th>
+                                    <th>Vuelo</th>
+                                    <th>Estado</th>
+                                    <th>Actualizar</th>
+                                    <th>Eliminar</th>
+                                </tr>
+                                @foreach (var reserva in Model.ListReservas)
+                                {
+                                    <tr>
+                                        <td>@reserva.Pasajero.Nombre</td>
+                                        <td>@reserva.Vuelo.Codigo</td>
+                                        <td>@reserva.Estado</td>
+                                        <td>@Html.ActionLink("Editar", "ActualizarReserva", "Reserva", new { id = reserva.ReservaID }, null)</td>
+                                        <td>@Html.ActionLink("Eliminar", "EliminarReserva", "Reserva", new { id = reserva.ReservaID }, null)</td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <p>Inicie sesion para realizar esta accion</p>
+        }
+    }
+</div>

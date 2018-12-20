@@ -1,0 +1,60 @@
+﻿@model Aerolinea.Models.MostrarViewModels.MostrarVuelosViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Vuelos";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+@if (Model.ListVuelos.Count == 0)
+{
+    <div class="jumbotron">
+        <div class="text-danger">
+            <p>No hay vuelos disponibles</p>
+        </div>
+    </div>
+}
+else
+{
+
+    if (lg.GetUserType() == 2 || lg.GetUserType() == 1)
+    {
+        <div class="jumbotron">
+            @Html.ActionLink("Registrar", "RegistrarVuelo", "Vuelo")
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-10 col-lg-offset-1">
+            <div class="table-responsive">
+                <table class="table table-condensed table-hover table-bordered">
+                    <tr class="text-center active">
+                        <th>Codigo</th>
+                        <th>Destino</th>
+                        <th>Fecha</th>
+                        <th>Hora salida</th>
+                        <th>Hora llegada</th>
+                        <th>Avion</th>
+                        <th>Cupo</th>
+                        <th>Actualizar</th>
+                        <th>Eliminar Vuelo</th>
+                    </tr>
+                    @foreach (var vuelo in Model.ListVuelos)
+                    {
+                        <tr>
+                            <td>@vuelo.Codigo</td>
+                            <td>@vuelo.Destino.Nombre</td>
+                            <td>@vuelo.Fecha</td>
+                            <td>@vuelo.HoraSalida</td>
+                            <td>@vuelo.HoraLlegada</td>
+                            <td>@vuelo.Avion.Modelo</td>
+                            <td>@vuelo.Cupo</td>
+                            <td>@Html.ActionLink("Editar", "ActualizarVuelo", "Vuelo", new { id = vuelo.VueloID }, null)</td>
+                            <td>@Html.ActionLink("Eliminar", "EliminarVuelo", "Vuelo", new { id = vuelo.VueloID }, null)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+}

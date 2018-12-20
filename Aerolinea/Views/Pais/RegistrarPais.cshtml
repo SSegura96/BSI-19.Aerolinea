@@ -1,0 +1,26 @@
+﻿@model Aerolinea.Models.PaisViewModels.RegistrarPaisViewModel
+@{
+    ViewBag.Title = "Registrar Pais";
+    Layout = null;
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-inline" role="form">
+            @Html.ValidationSummary(true)
+            <fieldset>
+                <legend>Detalles del Pais</legend>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Nombre, new { @class = "option" })
+                    @Html.TextBoxFor(model => model.Nombre, new { @class = "form-control", @Value = Model.Nombre, @readonly = "readonly", @placeHolder = "Nombre del Pias.. Ejm: ''Costa Rica''" })
+                    @Html.ValidationMessageFor(model => model.Nombre)
+                </div>
+
+                <div class="form-control-static">
+                    <input type="submit" class="btn btn-primary" value="Registrar" />
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>

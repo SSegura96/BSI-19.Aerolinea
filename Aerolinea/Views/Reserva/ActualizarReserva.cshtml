@@ -1,0 +1,49 @@
+﻿@model Aerolinea.Models.RegistrarReservaViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Reserva";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal" role="form">
+            <fieldset>
+                <legend>Detalles de la reserva</legend>
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Codigo, new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Codigo, new { Value = Model.Codigo, @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Vuelo, new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.Vuelo, new SelectList(Model.listaItemsVuelos, "Value", "Text"), "Seleccione un vuelo", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Pasajero, new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.Pasajero, new SelectList(Model.listaItemsPasajeros, "Value", "Text"), "Seleccione un Pasajero", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Estado, new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.TextBoxFor(model => model.Estado, new { Value = Model.Estado, @class = "form-control", @placeholder = "Estado de la reserva.." })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar" />
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>

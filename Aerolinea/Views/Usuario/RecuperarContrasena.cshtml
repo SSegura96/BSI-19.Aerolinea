@@ -1,0 +1,25 @@
+﻿@model Aerolinea.Models.UsuarioViewModels.RecuperarContrasenaViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Recuperar contraseña";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+    <div class="jumbotron">
+        <p>Si el correo es correcto le enviaremos su contraseña</p>
+    </div>
+    
+    @using (Html.BeginForm("RecuperarContrasena", "Usuario", FormMethod.Post, new { @class = "form-inline" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Correo, new { @class = "option" })
+            @Html.TextBoxFor(model => model.Correo, new { @class = "form-control", @placeholder = "Correo Electronico.." })
+        </div>
+        
+        <div class="form-control-static">
+            <input type="submit" class="btn btn-primary" value="Enviar" />
+        </div>
+    }
+</div>

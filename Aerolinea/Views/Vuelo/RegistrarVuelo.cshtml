@@ -1,0 +1,67 @@
+﻿@model Aerolinea.Models.RegistrarVueloViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Registrar Vuelo";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+
+    @using (Html.BeginForm("RegistrarVuelo", "Administrar", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+    {
+        <div class="form-horizontal" role="form">
+            <fieldset>
+
+                <legend>Detalles del Vuelo</legend>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Codigo, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Codigo, new { @class = "form-control", @Value = Model.Codigo, @readonly = "readonly" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.HoraFechaLlegada, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.HoraFechaLlegada, new { @class = "form-control", @placeholder = "mm/dd/yyyy.." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.HoraFechaSalida, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.HoraFechaSalida, new { @class = "form-control", @placeholder = "mm/dd/yyyy.." })
+                    </div>
+                </div>
+                    
+                @*Aqui va un textbox con el nombre del aeropuerto con readonly, esto se establece en aerolinea*@
+                @*  <div class="form-group col-md-offset-2">
+                        @Html.LabelFor(model => model.AeropuertoSalida, new { @class = "control-label col-md-5" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(model => model.AeropuertoSalida, new { @class = "form-control", @placeholder = "mm/dd/yyyy.." })
+                        </div>
+                    </div>*@
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.AeropuertoLlegada, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.AeropuertoLlegada, new SelectList(Model.listaItemsAeropuertos, "Value", "Text"), "Seleccione un Aeropuerto", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Avion, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.Avion, new SelectList(Model.listaItemsAviones, "Value", "Text"), "Seleccione un avion", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Añandir" />
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>

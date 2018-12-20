@@ -1,0 +1,75 @@
+﻿@using Aerolinea.Models
+@{
+    Logic lg = new Logic();
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/StyleAgente.css" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="text-center"><h1> <b>Orange Airlines</b> <br />@ViewBag.Title</h1></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10 col-lg-offset-1">
+                <ul class="nav nav-pills nav-justified">
+                    <li role="presentation" class="btn-link">@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink("Vuelos", "ListaVuelos", "Mostrar")</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink("Aviones", "ListaAviones", "Mostrar")</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink("Reservas", "ListaReservas", "Mostrar")</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink("RegistrarPasajero", "RegistrarUsuarioEstandar", "Usuario")</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink(@lg.GetDisplay(), "ActualizarPasajero", "Administrar", new { id = @lg.GetPassengerID() }, null)</li>
+                    <li role="presentation" class="btn-link">@Html.ActionLink("Agente Aero - Salir", "CerrarSesion", "Usuario")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="text-center col-md-10 col-md-offset-1">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>
+@*<div id="Header">
+        <div id="logo">
+            @Html.ActionLink("Orange Sky", "Index", "Home");
+        </div>
+        <div id="navMenu">
+            <ul id="menu">
+                <li>
+                    <a>Vuelos</a>
+                    <ul>
+                        <li>@Html.ActionLink("Ver Lista", "ListaVuelos", "Mostrar")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a>Aviones</a>
+                    <ul>
+                        <li>@Html.ActionLink("Ver Lista", "ListaAviones", "Mostrar")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a>Reserva</a>
+                    <ul>
+                        <li>@Html.ActionLink("Ver Lista", "ListaReservas", "Mostrar")</li>
+                        <li>@Html.ActionLink("Registrar", "RegistrarReserva", "Administrar")</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div id="SystemLog">
+            @Html.ActionLink("Agente Aerolinea salir", "CerrarSesion", "Usuario")
+        </div>
+    </div>
+    @RenderBody()*@

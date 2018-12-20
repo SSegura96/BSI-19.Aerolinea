@@ -1,0 +1,68 @@
+﻿@model Aerolinea.Models.AdministrarViewModels.RegistrarAsientoViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Registrar Asientos";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal" role="form">
+            <fieldset>
+                <legend>Detalles de los asientos del avion</legend>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.ListaModelos, new { @class = "control-label col-md-5" })
+                    <div class="col-md-3">
+                        @Html.DropDownListFor(model => model.modeloId, new SelectList(Model.ListaModelos, "Value", "Text"), "Seleccione un Avion", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Clase, new { @class = "control-label" })
+                    <div class="radio">
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Clase, "VIP")
+                            @Html.LabelFor(model => model.Clase, "VIP")
+                        </div>
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Clase, "Estandar")
+                            @Html.LabelFor(model => model.Clase, "Estandar")
+                        </div>
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Clase, "Economico")
+                            @Html.LabelFor(model => model.Clase, "Economico")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Tipo, new { @class = "control-label" })
+                    <div class="radio">
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Tipo, "Ventana")
+                            @Html.LabelFor(model => model.Tipo, "Ventana")
+                        </div>
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Tipo, "Centro")
+                            @Html.LabelFor(model => model.Tipo, "Centro")
+                        </div>
+                        <div class="radio-inline">
+                            @Html.RadioButtonFor(model => model.Tipo, "Pasillo")
+                            @Html.LabelFor(model => model.Tipo, "Pasillo")
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Registrar" />
+                </div>
+
+            </fieldset>
+        </div>
+        <div>
+            <p>Sola muy sola</p>
+        </div>
+    }
+</div>

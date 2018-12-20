@@ -1,0 +1,66 @@
+﻿@model Aerolinea.Models.UsuarioViewModels.RegistrarUsuarioViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Registrar Usuario";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal" role="form">
+            <fieldset>
+                <legend>Detalles del Usuario</legend>
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.correo, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.correo, new { @class = "form-control", @placeholder = "hola@ejemplo.com.." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.contrasena, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.PasswordFor(model => model.contrasena, new { @class = "form-control", @placeholder = "Contraseña.." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    <label class="control-label col-md-5">Repetir contraseña</label>
+                    <div class="col-md-4">
+                        <input type="password" class="form-control" placeholder="Repetir Contraseña" />
+                    </div>
+                </div>
+
+                @if (lg.GetUserType() == 1)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.rol)
+                        <div class="radio">
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.rol, 1)
+                                @Html.LabelFor(model => model.rol, "Administrador Sistema")
+                            </div>
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.rol, 2)
+                                @Html.LabelFor(model => model.rol, "Administrador Aerolinea")
+                            </div>
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.rol, 3)
+                                @Html.LabelFor(model => model.rol, "Agente Ventas")
+                            </div>
+                            <div class="radio-inline">
+                                @Html.RadioButtonFor(model => model.rol, 4)
+                                @Html.LabelFor(model => model.rol, "Cliente/Estandar")
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Siguiente" />
+                </div>
+            </fieldset>
+        </div>
+    }
+</div>

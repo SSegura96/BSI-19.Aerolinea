@@ -1,0 +1,65 @@
+﻿@model Aerolinea.Models.RegistrarVueloViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Actualizar Vuelo";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+<div class="container">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal" role="form">
+            <fieldset>
+                <legend>Detalles del Vuelo</legend>
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Codigo, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Codigo, new { Value = Model.Codigo, @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Destino, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.Destino, new SelectList(Model.listaItemsPaises, "Value", "Text"), "Seleccione un destino", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Fecha, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.Fecha, new { Value = Model.Fecha, @class = "form-control", @placeholder = "mm/dd/yyyy.." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.HoraSalida, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.HoraSalida, new { Value = Model.HoraSalida, @class = "form-control", @placeholder = "Hora (formato 24H).." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.HoraLlegada, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.TextBoxFor(model => model.HoraLlegada, new { Value = Model.HoraLlegada, @class = "form-control", @placeholder = "Hora (formato 24H).." })
+                    </div>
+                </div>
+
+                <div class="form-group col-md-offset-2">
+                    @Html.LabelFor(model => model.Avion, new { @class = "control-label col-md-5" })
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.Avion, new SelectList(Model.listaItemsAviones, "Value", "Text"), "Seleccione un avion", new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="Actualizar" />
+                </div>
+
+            </fieldset>
+        </div>
+    }
+</div>

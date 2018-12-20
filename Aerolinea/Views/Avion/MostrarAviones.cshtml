@@ -1,0 +1,74 @@
+﻿@model Aerolinea.Models.MostrarViewModels.MostrarAvionesViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Aviones";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+@if (lg.GetUserType() == 1 || lg.GetUserType() == 2)
+{
+    <div class="jumbotron">
+        @Html.ActionLink("Registrar", "RegistrarAvion", "Administrar")
+    </div>
+}
+
+<div>
+    <h3>Aviones</h3>
+    @{
+        if (Model.listAvi.Count == 0)
+        {
+            <div class="jumbotron">
+                <p>No hay aviones registrados</p>
+            </div>
+        }
+        else
+        {
+
+            <div class="row">
+                <div class="col-md-10 col-lg-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-bordered table-condensed">
+                            <tr class="text-center active">
+                                <th>Numero de serie</th>
+                                <th>Nombre/Modelo</th>
+                                <th>Capacidad</th>
+                                <th>Asientos</th>
+                                <th>Actualizar Avion</th>
+                                <th>Eliminar Avion</th>
+                            </tr>
+                            @foreach (var avion in Model.listAvi)
+                            {
+                                if (avion.Asientos.Count == 0)
+                                {
+                                    <tr>
+                                        <td>@avion.NumSerie</td>
+                                        <td>@avion.Modelo</td>
+                                        <td>@avion.Capacidad</td>
+                                        <!--Seccion Extra para los valores especificos de los aviones-->
+                                        <td>@Html.ActionLink("Ver Asientos", "MostrarAsientos", "Asiento", new { id = avion.AvionID }, null)</td>
+                                        <td>@Html.ActionLink("Editar", "ActualizarAvion", "Avion", new { id = avion.AvionID }, null)</td>
+                                        <td>@Html.ActionLink("Eliminar", "EliminarAvion", "Avion", new { id = avion.AvionID }, null)</td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>@avion.NumSerie</td>
+                                        <td>@avion.Modelo</td>
+                                        <td>@avion.Capacidad</td>
+                                        <!--Seccion Extra para los valores especificos de los aviones-->
+                                        <td>@Html.ActionLink("Ver Asientos", "MostrarAsientos", "Asiento", new { id = avion.AvionID }, null)</td>
+                                        <td>@Html.ActionLink("Editar", "ActualizarAvion", "Administrar", new { id = avion.AvionID }, null)</td>
+                                        <td>No se pueden eliminar aviones con asientos.</td>
+                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>

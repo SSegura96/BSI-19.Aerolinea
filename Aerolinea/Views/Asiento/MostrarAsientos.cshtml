@@ -1,0 +1,61 @@
+﻿@model Aerolinea.Models.MostrarViewModels.MostrarAsientosViewModel
+@using Aerolinea.Models;
+@{
+    ViewBag.Title = "Lista de Asientos";
+    Logic lg = new Logic();
+    Layout = lg.ObtenerLayout(lg.GetUserType());
+}
+
+@if (lg.GetUserType() == 2 || lg.GetUserType() == 1)
+{
+
+        <div class="jumbotron">
+            @Html.ActionLink("Crear Asientos", "RegistrarAsiento", "Administrar")
+        </div>
+}
+    <div class="jumbotron">
+        <h2>Avion:</h2>
+        <p>Numero de Serie: @Model.avion.NumSerie</p>
+        <p>Modelo: @Model.avion.Modelo</p>
+        <p>Capacidad: @Model.avion.Capacidad</p>
+    </div>
+
+    <div>
+        <h2>Asientos:</h2>
+        @if (Model.avion.Asientos.Count > 0)
+        {
+            <div class="row">
+                <div class="col-md-10 col-lg-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-bordered table-condensed">
+                            <tr class="text-center active">
+                                <th>Clase</th>
+                                <th>Tipo</th>
+                                <th>Actualizar Asiento</th>
+                                <th>Eliminar Asiento</th>
+                            </tr>
+                            @foreach (var asiento in Model.avion.Asientos)
+                            {
+                                /*Hacer condiciones if para mostrar solo valores de asientos
+                                 ejm = 200 de VIP en pasillo y asi*/
+                                <tr>
+                                    <td>@asiento.Clase</td>
+                                    <td>@asiento.tipo</td>
+                                    <td>@Html.ActionLink("Actualizar", "ActualizarAsiento", "Administrar")</td>
+                                    <td>@Html.ActionLink("Eliminar", "EliminarAsiento", "Administrar", new { id = asiento.AsientoID }, null)</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="jumbotron">
+                <div class="text-danger">
+                    <p>El avion no posee asientos creados todavia.</p>
+                </div>
+            </div>
+        }
+    </div>

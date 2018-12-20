@@ -1,0 +1,50 @@
+﻿@model Aerolinea.Models.PaisViewModels.MostrarPaisesViewModel
+@{
+    ViewBag.Title = "Listas Paises";
+    Layout = null;
+}
+
+<!--Hay que validar que los tipos no vean este atributo-->
+<div class="jumbotron">
+    @Html.ActionLink("Registrar", "RegistrarPais", "Pais")
+</div>
+<!--Hay que validar que los tipos no vean este atributo-->
+
+<div>
+    <h3>Paises</h3>
+    @{
+        if (Model.listaPaises.Count == 0)
+        {
+            <div class="jumbotron">
+                <p>No hay paises registrados</p>
+            </div>
+        }
+        else
+        {
+
+            <div class="row">
+                <div class="col-md-10 col-lg-offset-1">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-hover table-bordered table-condensed">
+                            <tr class="text-center active">
+                                <th>Nombre</th>
+                                <th>Actualizar Pais</th>
+                                <th>Eliminar Pais</th>
+                            </tr>
+                            @foreach (var pais in Model.listaPaises)
+                            {
+                                <tr>
+                                    <td>@pais.Nombre</td>
+                                    <!--Seccion Extra para los valores especificos de los paises-->
+                                    <td>@Html.ActionLink("Editar", "ActualizarPais", "Pais", new { id = pais.PaisID }, null)</td>
+                                    <td>@Html.ActionLink("Eliminar", "EliminarPais", "Pais", new { id = pais.PaisID }, null)</td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+
+</div>
